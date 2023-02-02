@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Customer\LoginController as CustomerLoginController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -18,9 +19,17 @@ use App\Http\Controllers\HomeController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
-    Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi')->middleware('auth');
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+    Route::get('dashboard', [HomeController::class, 'index'])->name('home');
+    Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
+});
+
+
+Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
+    Route::get('customer', function () {
+        return 'customer';
+    })->name('customer');
+    Route::get('logoutaksi', [CustomerLoginController::class, 'logoutaksi'])->name('logoutaksicustomer');
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
