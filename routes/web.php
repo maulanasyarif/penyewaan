@@ -20,17 +20,22 @@ use App\Http\Controllers\HomeController;
 //     return view('welcome');
 // });
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
-    Route::get('dashboard', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
 });
 
 
 Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
-    Route::get('customer', function () {
+    Route::get('/', function () {
         return 'customer';
     })->name('customer');
     Route::get('logoutaksi', [CustomerLoginController::class, 'logoutaksi'])->name('logoutaksicustomer');
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::get('forgot', [LoginController::class, 'viewForgot'])->name('forgot');
+Route::post('forgot', [LoginController::class, 'forgot'])->name('forgotAksi');
 Route::post('loginaksi', [LoginController::class, 'loginaksi'])->name('loginaksi');
+Route::get('view-verify', [LoginController::class, 'token'])->name('view-verify');
+Route::get('verify-token', [LoginController::class, 'verifyToken'])->name('verify-token');
+Route::post('verify-token', [LoginController::class, 'updatePassword'])->name('verify-token');

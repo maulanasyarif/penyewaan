@@ -34,45 +34,28 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Masukkan email</p>
 
-                <form id="form-login" method="POST" action="{{ route('loginaksi')}}">
+                <form id="form-login" method="POST" action="{{ route('forgot')}}">
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Username" name="email" required="true">
+                        <input type="email" class="form-control" placeholder="Johndoe@gmail.com" name="email" required="true">
                         <!-- <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div> -->
                     </div>
-                    <div class="input-group mb-3">
-                        <input id="password" type="password" class="form-control" placeholder="Password" required="true"
-                            name="password">
-                        <!-- <div class=" input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div> -->
-                    </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="">
-                                <input type="checkbox" id="look">
-                                <label for="s-password">
-                                    Show Password
-                                </label>
-                            </div>
-                        </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Kirim</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-                <a href="{{url('/').'/forgot'}}">Lupa password</a>
+
                 <!-- <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
                     <a href="#" class="btn btn-block btn-primary">
@@ -110,8 +93,6 @@
             // console.log("Aaa");
             if ($(this).is(":checked")) {
                 $("#password").attr("type", "text");
-            } else {
-                $("#password").attr("type", "password");
             }
         })
     })
