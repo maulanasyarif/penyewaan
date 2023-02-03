@@ -220,9 +220,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
+                                    <a href="{{route('menu-item.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Menu Item</p>
+                                        <p>Menu Items</p>
                                     </a>
                                 </li>
                             </ul>

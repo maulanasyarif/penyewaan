@@ -38,7 +38,7 @@
               @csrf
               @method('PATCH')
             <div class="form-group">
-              <label for="menu">Nama Menu</label>
+              <label for="menu">Nama Category</label>
               <input type="text" class="form-control" id="menu" placeholder="Masukkan menu" name="menu" value="{{$menu->name}}" required>
             </div>
             <div class="form-group">

@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'Tambah Data Menu')
+@section('title', 'Edit Data Menu Item')
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 id="token" class="m-0 text-dark">Tambah Menu {{ Auth::user()->name }}</h1>
+                <h1 id="token" class="m-0 text-dark">Edit Menu Item {{ Auth::user()->name }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                    <li class="breadcrumb-item active">Menu</li>
+                    <li class="breadcrumb-item active">Menu Item</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -35,22 +35,36 @@
               </div>
           @endif
          <div class="col-lg-12">
-            <form action="{{route('menu.store')}}" method="post">
+            <form action="{{route('menu-item.update', $menuItem->id)}}" method="post">
               @csrf
-              @method('POST')
+              @method('PATCH')
             <div class="form-group">
-              <label for="menu">Nama Category</label>
-              <input type="text" class="form-control" id="menu" placeholder="Masukkan menu" name="menu" required>
+              <label for="menu">Category</label>
+              <select class="form-control" id="menu" name="menu">
+                @forelse ($menus as $menu)
+                  <option value="{{$menu->id}}" {{$menu->id == $menuItem->menu_id ? 'selected' : null}}>{{strtoupper($menu->name)}}</option>
+                @empty
+                  <option disabled>Tidak ada data</option>
+                @endforelse
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="jenis_menu">Jenis Category</label>
+              <input type="text" class="form-control" id="jenis_menu" placeholder="Masukkan Jenis Category" name="jenis_menu" value="{{$menuItem->name}}" required>
+            </div>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" class="form-control" id="price" placeholder="100000" name="price" min="0" value="{{$menuItem->price}}" required>
             </div>
             <div class="form-group">
               <label for="status">Status</label>
               <select class="form-control" id="status" name="status">
-                <option value="0">Aktif</option>
-                <option value="1">Tidak Aktif</option>
+                <option value="0" {{$menuItem->status == 0 ? 'selected' : null}}>Aktif</option>
+                <option value="1" {{$menuItem->status == 1 ? 'selected' : null}}>Tidak Aktif</option>
               </select>
             </div>
             <button class="btn btn-primary">Simpan</button>
-            <a href="{{route('menu.index')}}" class="btn btn-secondary">Kembali</a>
+            <a href="{{route('menu-item.index')}}" class="btn btn-secondary">Kembali</a>
           </form>
         </div>
         </div>

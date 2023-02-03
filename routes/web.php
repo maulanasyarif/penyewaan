@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Customer\LoginController as CustomerLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MenuItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,13 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('menu/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::patch('menu/{id}', [MenuController::class, 'update'])->name('menu.update');
     Route::delete('menu/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
+
+    Route::get('menu-items', [MenuItemController::class, 'index'])->name('menu-item.index');
+    Route::get('menu-items/create', [MenuItemController::class, 'create'])->name('menu-item.create');
+    Route::post('menu-items', [MenuItemController::class, 'store'])->name('menu-item.store');
+    Route::get('menu-items/{id}/edit', [MenuItemController::class, 'edit'])->name('menu-item.edit');
+    Route::patch('menu-items/{id}', [MenuItemController::class, 'update'])->name('menu-item.update');
+    Route::delete('menu-items/{id}', [MenuItemController::class, 'destroy'])->name('menu-item.destroy');
 
 
     Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
