@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('transaksi_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnUpdate();
-            $table->decimal('total_price', 13, 2);
-            $table->text('noted');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
-            $table->tinyInteger('status');
+            $table->foreignId('transaksi_id')->references('id')->on('transaksi')->cascadeOnUpdate();
+            $table->foreignId('menuitem_id')->references('id')->on('menu_items')->cascadeOnUpdate();
             $table->timestamps();
             $table->timestamp('deleted_at');
         });
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi');
+        Schema::dropIfExists('transaksi_details');
     }
 };
