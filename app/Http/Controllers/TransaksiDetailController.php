@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class TransaksiDetailController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['admin', 'customer']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
