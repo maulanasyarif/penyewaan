@@ -1,9 +1,10 @@
 $(document).ready(function () {
     __fetchJam();
-    __loadItem();
+
     __onChange();
     __clickJam();
     __submit();
+    var defaultItemId = 0;
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -17,7 +18,10 @@ $(document).ready(function () {
     }
 
     today = yyyy + "-" + mm + "-" + dd;
-    document.getElementById("date").setAttribute("min", today);
+    const inputDate = document.getElementById("date");
+    inputDate.setAttribute("min", today);
+    inputDate.value = today;
+    __loadItem(defaultItemId, today);
 });
 
 var jam = [];
@@ -42,16 +46,17 @@ function __fetchJam() {
     });
 }
 
-function __loadItem() {
+function __loadItem(item_id, today) {
     $.ajax({
         url: `/customer/item`,
         type: "GET",
         dataType: "JSON",
+        data: { item_id, today },
         beforeSend: function () {},
         success: function (res) {
             if (res.code == 200) {
                 if (res.data.length > 0) {
-                    var htm = ``;
+                    var htm = `<option disabled selected>-- Choose Category --</option>`;
                     $.each(res.data, function (k, v) {
                         htm += `
                             <option value="${v.id}" dt="${v.name}">${v.name} | ${v.price}</option>
@@ -90,6 +95,7 @@ function __getItem({ item_id, tanggal }) {
         .attr("disabled", false);
     $("#total").html(0);
     $("#total_jam").html(`0 Jam`);
+    $("#detail_jam").html("");
     var dt = { item_id, today: tanggal };
     $.ajax({
         url: `/customer/item`,
