@@ -56,6 +56,16 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
+                        <div class="form-group">
+                            <label for="note" class="block">Catatan</label>
+                            <textarea name="note" id="note" cols="6" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
                         <span style="font-size: 20px;">Transaksi</span>
                         <div class="row">
                             <div class="col-md-3">
@@ -63,6 +73,7 @@
                             </div>
                             <div class="col-md-9">
                                 : {{ Auth::user()->name }}
+                                <input type="hidden" value="{{auth()->user()->id}}" id="user_id" name="user_id">
                             </div>
                             <div class="col-md-3">
                                 Nama Sewa

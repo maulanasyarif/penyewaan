@@ -1,6 +1,5 @@
 $(document).ready(function () {
     __fetchJam();
-
     __onChange();
     __clickJam();
     __submit();
@@ -86,16 +85,6 @@ function __onChange() {
 }
 
 function __getItem({ item_id, tanggal }) {
-    arrJam = [];
-    jam = [];
-    $(document)
-        .find(`.btn-jam`)
-        .removeClass("btn-success")
-        .addClass("btn-info")
-        .attr("disabled", false);
-    $("#total").html(0);
-    $("#total_jam").html(`0 Jam`);
-    $("#detail_jam").html("");
     var dt = { item_id, today: tanggal };
     $.ajax({
         url: `/customer/item`,
@@ -125,21 +114,6 @@ function __loadTransaksi(data) {
             })
         );
     });
-    //contoh
-    // var pending = [
-    //     "06:00",
-    //     "07:00",
-    //     "08:00",
-    //     "09:00",
-    // ];
-
-    // var success = ["10.00", "11.00", "12.00", "13.00"];
-
-    // if(pending.length>0){
-    //     $.each(pending, function(k, v){
-    //         $(document).find(`.btn-jam[dt="${v}"]`).removeClass('btn-info').addClass('btn-warning').attr('disabled', true)
-    //     })
-    // }
 
     if (success.length > 0) {
         $.each(success, function (k, v) {
@@ -150,27 +124,19 @@ function __loadTransaksi(data) {
                 .attr("disabled", true);
         });
     }
+    if (!success.length) {
+        $(document)
+            .find(`.btn-jam`)
+            .removeClass("btn-success")
+            .addClass("btn-info")
+            .attr("disabled", false);
+        arrJam = [];
+        jam = [];
 
-    // $.ajax({
-    //     url: ``,
-    //     type: 'GET',
-    //     dataType: 'JSON',
-    //     data: param,
-    //     beforeSend: function() {
-    //     },
-    //     success: function(res) {
-    //         if(res.code == 200){
-    //             if(res.data.length>0){
-    //                 var htm = ``;
-    //                 // looping transaksi booking / pending
-    //             }
-    //         }
-    //     },
-    //     error: function(err) {
-    //     },
-    //     complete: function() {
-    //     },
-    // })
+        $("#total").html(0);
+        $("#total_jam").html(`0 Jam`);
+        $("#detail_jam").html("");
+    }
 }
 
 function __clickJam() {
@@ -202,31 +168,17 @@ function __submit() {
     $(document).on("click", "#btn-submit", function () {
         var menu = $(document).find('select[name="item_id"]').val();
         var tanggal = $(document).find('input[name="tanggal"]').val();
+        var user_id = $(document).find('input[name="user_id"]').val();
+        var note = $("#note").val();
+        var harga = $(document).find('span[id="harga"]').html();
         var jam = arrJam;
 
         data.menu_id = menu;
         data.jam = jam;
         data.tanggal = tanggal;
+        data.user_id = user_id;
+        data.note = note;
+        data.harga = Number(harga);
         console.log(data);
-
-        // $.ajax({
-        //     url: ``,
-        //     type: 'POST',
-        //     dataType: 'JSON',
-        //     data: data,
-        //     beforeSend: function() {
-        //     },
-        //     success: function(res) {
-        //         if(res.code == 200){
-        //             if(res.data.length>0){
-        //
-        //             }
-        //         }
-        //     },
-        //     error: function(err) {
-        //     },
-        //     complete: function() {
-        //     },
-        // })
     });
 }
