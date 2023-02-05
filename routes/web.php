@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuItemController;
 
+//user
+use App\Http\Controllers\Customer\TransactionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,9 +47,13 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
 
 
 Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
-    Route::get('/', function () {
-        return 'customer';
-    })->name('customer');
+    // Route::get('/', function () {
+    //     return 'customer';
+    // })->name('customer');
+    Route::get('/transaksi', [TransactionController::class, 'index'])->name('customer');
+
+    //menu item
+    Route::get('item', [MenuItemController::class, 'transaksi'])->name('item');
     Route::get('logoutaksi', [CustomerLoginController::class, 'logoutaksi'])->name('logoutaksicustomer');
 });
 

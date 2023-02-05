@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ISO - TMS | Log in</title>
+    <title>Penyewaan</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,7 +29,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href=""><b>TMS</b> - ISO</a>
+            <a href=""><b>Penyewaan</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -40,7 +40,8 @@
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Johndoe@gmail.com" name="email" required="true">
+                        <input type="email" class="form-control" placeholder="Johndoe@gmail.com" name="email"
+                            required="true">
                         <!-- <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

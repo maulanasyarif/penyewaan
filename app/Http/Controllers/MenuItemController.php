@@ -107,4 +107,29 @@ class MenuItemController extends Controller
             'success' => 'Berhasil delete data!'
         ]);
     }
+
+    public function transaksi(Request $request)
+    {
+        $id = (int)$request->item_id;
+        $data = MenuItem::with(['menu'])
+        ->when($id, function($query) use ($id){
+            return $query->where('id', $id);
+        })
+        ->get();
+
+        if($data){
+            return response()->json([
+                'status' => true,
+                'code'  => 200,
+                'msg' => 'Success fetch data',
+                'data' =>  $data,
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'code'  => 404,
+                'msg' => 'Data not found'
+            ]);
+        }
+    }
 }

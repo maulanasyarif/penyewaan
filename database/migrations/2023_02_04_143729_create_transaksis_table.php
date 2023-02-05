@@ -19,10 +19,10 @@ return new class extends Migration
             $table->decimal('total_price', 13, 2);
             $table->text('noted');
             $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('end_time')->nullable();
             $table->tinyInteger('status');
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

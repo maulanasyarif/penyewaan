@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('transaksi_id')->references('id')->on('transaksi')->cascadeOnUpdate();
             $table->foreignId('menuitem_id')->references('id')->on('menu_items')->cascadeOnUpdate();
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
