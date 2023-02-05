@@ -2,7 +2,6 @@ $(document).ready(function () {
     __fetchJam();
     __loadItem();
     __onChange();
-    __loadTransaksi(null);
     __clickJam();
     __submit();
     var today = new Date();
@@ -75,13 +74,12 @@ function __onChange() {
                 opt[$(v).attr("name")] = $(v).val();
             });
         $("#tgl").html(opt.tanggal);
-        __loadTransaksi(opt);
-        __getItem(opt.item_id);
+        __getItem(opt);
     });
 }
 
-function __getItem(id) {
-    var dt = { item_id: id };
+function __getItem({ item_id, tanggal }) {
+    var dt = { item_id, today: tanggal };
     $.ajax({
         url: `/customer/item`,
         type: "GET",
@@ -90,6 +88,7 @@ function __getItem(id) {
         beforeSend: function () {},
         success: function (res) {
             if (res.code == 200) {
+                __loadTransaksi(res.booked);
                 $("span#item").html(res.data[0].name);
                 $("span#harga").html(`${res.data[0].price}`);
             }
@@ -101,7 +100,16 @@ function __getItem(id) {
 
 function __loadTransaksi(data) {
     var param = data;
-
+    let success = [];
+    $.each(data, function (index, value) {
+        success.push(
+            new Date(value.transaksi.start_time).toLocaleTimeString("id-ID", {
+                hour: "2-digit",
+                minute: "2-digit",
+            })
+        );
+    });
+    console.log(success);
     //contoh
     // var pending = [
     //     "06:00",
@@ -110,7 +118,7 @@ function __loadTransaksi(data) {
     //     "09:00",
     // ];
 
-    var success = ["10:00", "11:00", "12:00", "13:00"];
+    // var success = ["10.00", "11.00", "12.00", "13.00"];
 
     // if(pending.length>0){
     //     $.each(pending, function(k, v){
@@ -125,6 +133,16 @@ function __loadTransaksi(data) {
                 .removeClass("btn-info")
                 .addClass("btn-success")
                 .attr("disabled", true);
+        });
+    }
+    if (success.length < 1) {
+        console.log("ok");
+        $(".btn-jam").each(function (k, v) {
+            $(document)
+                .find(`.btn-jam`)
+                .removeClass("btn-success")
+                .addClass("btn-info")
+                .attr("disabled", false);
         });
     }
 

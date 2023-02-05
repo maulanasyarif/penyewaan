@@ -29,7 +29,7 @@
                 <div class="row" id="option">
                     <div class="col-md-3">
                         <select id="item" name="item_id" style="width: 100%; height: 30px;">
-
+                            <option >-- Choose Category --</option>
                         </select>
                     </div>
                     <div class="col-md-4">

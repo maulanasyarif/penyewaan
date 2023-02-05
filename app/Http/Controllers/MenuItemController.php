@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\MenuItem;
+use App\Models\TransaksiDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MenuItemController extends Controller
@@ -111,20 +113,29 @@ class MenuItemController extends Controller
     public function transaksi(Request $request)
     {
         $id = (int)$request->item_id;
+        $today = $request->today;
         $data = MenuItem::with(['menu'])
-        ->when($id, function($query) use ($id){
-            return $query->where('id', $id);
-        })
-        ->get();
+            ->when($id, function ($query) use ($id) {
+                return $query->where('id', $id);
+            })
+            ->get();
 
-        if($data){
+        $booked = TransaksiDetail::with(['transaksi'])
+            ->where('menuitem_id', $id)
+            ->whereHas('transaksi', function ($q) use ($today) {
+                $q->where('status', 1)
+                    ->whereDate('start_time', $today);
+            })->get();
+
+        if ($data) {
             return response()->json([
                 'status' => true,
                 'code'  => 200,
                 'msg' => 'Success fetch data',
                 'data' =>  $data,
+                'booked' => $booked
             ]);
-        }else{
+        } else {
             return response()->json([
                 'status' => false,
                 'code'  => 404,
