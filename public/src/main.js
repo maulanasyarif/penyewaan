@@ -88,6 +88,13 @@ function __getItem({ item_id, tanggal }) {
         beforeSend: function () {},
         success: function (res) {
             if (res.code == 200) {
+                $(".btn-jam").each(function (k, v) {
+                    $(document)
+                        .find(`.btn-jam`)
+                        .removeClass("btn-success")
+                        .addClass("btn-info")
+                        .attr("disabled", false);
+                });
                 __loadTransaksi(res.booked);
                 $("span#item").html(res.data[0].name);
                 $("span#harga").html(`${res.data[0].price}`);
@@ -109,7 +116,6 @@ function __loadTransaksi(data) {
             })
         );
     });
-    console.log(success);
     //contoh
     // var pending = [
     //     "06:00",
@@ -133,16 +139,6 @@ function __loadTransaksi(data) {
                 .removeClass("btn-info")
                 .addClass("btn-success")
                 .attr("disabled", true);
-        });
-    }
-    if (success.length < 1) {
-        console.log("ok");
-        $(".btn-jam").each(function (k, v) {
-            $(document)
-                .find(`.btn-jam`)
-                .removeClass("btn-success")
-                .addClass("btn-info")
-                .attr("disabled", false);
         });
     }
 
