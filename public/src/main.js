@@ -8,6 +8,7 @@ $(document).ready(function () {
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
+
     if (dd < 10) {
         dd = "0" + dd;
     }
@@ -20,6 +21,7 @@ $(document).ready(function () {
 });
 
 var jam = [];
+var arrJam = [];
 for (let startHourInDay = 0; startHourInDay < 24; startHourInDay++) {
     let date = new Date(null);
     date.setHours(startHourInDay);
@@ -79,6 +81,15 @@ function __onChange() {
 }
 
 function __getItem({ item_id, tanggal }) {
+    arrJam = [];
+    jam = [];
+    $(document)
+        .find(`.btn-jam`)
+        .removeClass("btn-success")
+        .addClass("btn-info")
+        .attr("disabled", false);
+    $("#total").html(0);
+    $("#total_jam").html(`0 Jam`);
     var dt = { item_id, today: tanggal };
     $.ajax({
         url: `/customer/item`,
@@ -88,13 +99,6 @@ function __getItem({ item_id, tanggal }) {
         beforeSend: function () {},
         success: function (res) {
             if (res.code == 200) {
-                $(".btn-jam").each(function (k, v) {
-                    $(document)
-                        .find(`.btn-jam`)
-                        .removeClass("btn-success")
-                        .addClass("btn-info")
-                        .attr("disabled", false);
-                });
                 __loadTransaksi(res.booked);
                 $("span#item").html(res.data[0].name);
                 $("span#harga").html(`${res.data[0].price}`);
@@ -106,7 +110,6 @@ function __getItem({ item_id, tanggal }) {
 }
 
 function __loadTransaksi(data) {
-    var param = data;
     let success = [];
     $.each(data, function (index, value) {
         success.push(
@@ -164,7 +167,6 @@ function __loadTransaksi(data) {
     // })
 }
 
-var arrJam = [];
 function __clickJam() {
     $(document).on("click", "#btn", "#jam", function (e) {
         e.preventDefault();
