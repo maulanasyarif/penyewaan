@@ -109,38 +109,4 @@ class MenuItemController extends Controller
             'success' => 'Berhasil delete data!'
         ]);
     }
-
-    public function transaksi(Request $request)
-    {
-        $id = (int)$request->item_id;
-        $today = $request->today;
-        $data = MenuItem::with(['menu'])
-            ->when($id, function ($query) use ($id) {
-                return $query->where('id', $id);
-            })
-            ->get();
-
-        $booked = TransaksiDetail::with(['transaksi'])
-            ->where('menuitem_id', $id)
-            ->whereHas('transaksi', function ($q) use ($today) {
-                $q->where('status', 1)
-                    ->whereDate('start_time', $today);
-            })->get();
-
-        if ($data) {
-            return response()->json([
-                'status' => true,
-                'code'  => 200,
-                'msg' => 'Success fetch data',
-                'data' =>  $data,
-                'booked' => $booked
-            ]);
-        } else {
-            return response()->json([
-                'status' => false,
-                'code'  => 404,
-                'msg' => 'Data not found'
-            ]);
-        }
-    }
 }

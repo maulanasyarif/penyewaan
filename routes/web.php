@@ -50,10 +50,11 @@ Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
     // Route::get('/', function () {
     //     return 'customer';
     // })->name('customer');
-    Route::get('/transaksi', [TransactionController::class, 'index'])->name('customer');
 
-    //menu item
-    Route::get('item', [MenuItemController::class, 'transaksi'])->name('item');
+    Route::get('item', [TransactionController::class, 'transaksi'])->name('item');
+    Route::get('transaksi', [TransactionController::class, 'index'])->name('customer');
+    Route::post('transaksi', [TransactionController::class, 'store'])->name('booking.store');
+
     Route::get('logoutaksi', [CustomerLoginController::class, 'logoutaksi'])->name('logoutaksicustomer');
 });
 

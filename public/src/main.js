@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
     __fetchJam();
     __onChange();
     __clickJam();
@@ -114,7 +120,6 @@ function __loadTransaksi(data) {
             })
         );
     });
-
     if (success.length > 0) {
         $.each(success, function (k, v) {
             $(document)
@@ -179,6 +184,19 @@ function __submit() {
         data.user_id = user_id;
         data.note = note;
         data.harga = Number(harga);
-        console.log(data);
+
+        $.ajax({
+            url: "/customer/transaksi",
+            type: "POST",
+            dataType: "JSON",
+            data,
+            success: function (res) {
+                console.log(res);
+                window.location.reload();
+            },
+            error: function (error) {
+                //
+            },
+        });
     });
 }

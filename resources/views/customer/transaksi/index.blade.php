@@ -107,6 +107,7 @@
                             </div>
                             <div class="col-md-3">
                                 Total Harga
+                                <input type="hidden" value="total_harga" name="total_harga" id="total_harga">
                             </div>
                             <div class="col-md-9">
                                 : Rp. <span id="total"></span>
