@@ -112,6 +112,17 @@ function __getItem({ item_id, tanggal }) {
 
 function __loadTransaksi(data) {
     let success = [];
+    $(document)
+        .find(`.btn-jam`)
+        .removeClass("btn-success")
+        .addClass("btn-info")
+        .attr("disabled", false);
+    arrJam = [];
+    jam = [];
+
+    $("#total").html(0);
+    $("#total_jam").html(`0 Jam`);
+    $("#detail_jam").html("");
     $.each(data, function (index, booking) {
         const existJam = JSON.parse(booking.transaksi.jam);
         success.push(...existJam);
@@ -124,19 +135,6 @@ function __loadTransaksi(data) {
                 .addClass("btn-success")
                 .attr("disabled", true);
         });
-    }
-    if (!success.length) {
-        $(document)
-            .find(`.btn-jam`)
-            .removeClass("btn-success")
-            .addClass("btn-info")
-            .attr("disabled", false);
-        arrJam = [];
-        jam = [];
-
-        $("#total").html(0);
-        $("#total_jam").html(`0 Jam`);
-        $("#detail_jam").html("");
     }
 }
 
