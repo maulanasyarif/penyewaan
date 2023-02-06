@@ -16,4 +16,9 @@ class MenuItem extends Model
     {
         return $this->belongsTo(Menu::class);
     }
+
+    public function transaksidetail()
+    {
+        return $this->hasMany(TransaksiDetail::class);
+    }
 }

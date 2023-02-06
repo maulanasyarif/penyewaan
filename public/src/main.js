@@ -112,13 +112,9 @@ function __getItem({ item_id, tanggal }) {
 
 function __loadTransaksi(data) {
     let success = [];
-    $.each(data, function (index, value) {
-        success.push(
-            new Date(value.transaksi.start_time).toLocaleTimeString("id-ID", {
-                hour: "2-digit",
-                minute: "2-digit",
-            })
-        );
+    $.each(data, function (index, booking) {
+        const existJam = JSON.parse(booking.transaksi.jam);
+        success.push(...existJam);
     });
     if (success.length > 0) {
         $.each(success, function (k, v) {
@@ -176,22 +172,21 @@ function __submit() {
         var user_id = $(document).find('input[name="user_id"]').val();
         var note = $("#note").val();
         var harga = $(document).find('span[id="harga"]').html();
+        var total = $(document).find('span[id="total"]').html();
         var jam = arrJam;
 
         data.menu_id = menu;
-        data.jam = jam;
-        data.tanggal = tanggal;
+        data.jam = JSON.stringify(jam);
         data.user_id = user_id;
         data.note = note;
-        data.harga = Number(harga);
-
+        data.price = Number(harga);
+        data.total_price = Number(total);
         $.ajax({
             url: "/customer/transaksi",
             type: "POST",
             dataType: "JSON",
             data,
             success: function (res) {
-                console.log(res);
                 window.location.reload();
             },
             error: function (error) {

@@ -17,4 +17,9 @@ class TransaksiDetail extends Model
     {
         return $this->belongsTo(Transaksi::class);
     }
+
+    public function menuitem()
+    {
+        return $this->belongsTo(MenuItem::class);
+    }
 }

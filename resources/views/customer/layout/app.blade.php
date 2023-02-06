@@ -203,6 +203,15 @@
                                     Transasksi
                                 </p>
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('booking')}}" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Booking
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item ">
                             <a href="pages/gallery.html" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>

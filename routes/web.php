@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuItemController;
 
 //user
 use App\Http\Controllers\Customer\TransactionController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,8 @@ Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
 
     Route::get('item', [TransactionController::class, 'transaksi'])->name('item');
     Route::get('transaksi', [TransactionController::class, 'index'])->name('customer');
-    Route::post('transaksi', [TransactionController::class, 'store'])->name('booking.store');
+    Route::post('transaksi', [TransactionController::class, 'store'])->name('transaction.store');
+    Route::get('booking', [TransactionController::class, 'booking'])->name('booking');
 
     Route::get('logoutaksi', [CustomerLoginController::class, 'logoutaksi'])->name('logoutaksicustomer');
 });

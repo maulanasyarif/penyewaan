@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnUpdate();
+            $table->string('no_transaksi')->unique();
+            $table->decimal('price', 13, 2);
             $table->decimal('total_price', 13, 2);
             $table->text('noted');
             $table->timestamp('start_time');
