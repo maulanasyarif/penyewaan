@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TransaksiMail;
 use App\Models\MenuItem;
 use App\Models\Transaksi;
 use App\Models\TransaksiDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Ramsey\Uuid\Uuid;
 
 class TransactionController extends Controller
@@ -80,10 +83,12 @@ class TransactionController extends Controller
       'status' => 0
     ]);
 
-    TransaksiDetail::create([
+    $transaksi_detail = TransaksiDetail::create([
       'transaksi_id' => $transaksi->id,
       'menuitem_id' => $menu_id,
     ]);
+    $user = User::findOrFail($user_id);
+    Mail::to(env('MAIL_FROM_ADDRESS'))->send(new TransaksiMail($user, $transaksi, $transaksi_detail));
 
     return response()->json([
       'status' => true,
