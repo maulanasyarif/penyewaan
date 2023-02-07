@@ -10,7 +10,7 @@ class TransaksiController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['admin', 'customer']);
+        $this->middleware(['admin']);
     }
 
     /**
@@ -20,72 +20,48 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $transaksis = Transaksi::with(['transaksi_details', 'user'])
+            ->whereDate('created_at', date('Y-m-d'))
+            ->where('status', 0)
+            ->get();
+        return view('admin.transaksi.booking', compact('transaksis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function storeAccept(Request $request)
     {
-        //
+        $menu_id = $request->menu_id;
+        $transaksi = Transaksi::findOrFail($request->id);
+
+        $transaksi->status = 1;
+        $transaksi->save();
+
+        $getTransaksiAll = Transaksi::whereTime('start_time', date('H:i:s', strtotime($transaksi->start_time)))
+            ->where('status', 0)
+            ->whereHas('transaksi_details', function ($q) use ($menu_id) {
+                $q->where('menuitem_id', $menu_id);
+            })
+            ->get();
+
+        foreach ($getTransaksiAll as $tReject) {
+            $tReject->status = 2;
+            $tReject->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaksi berhasil di update'
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function storeReject(Request $request)
     {
-        //
-    }
+        $transaksi = Transaksi::findOrFail($request->id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaksi $transaksi)
-    {
-        //
+        $transaksi->status = 2;
+        $transaksi->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaksi berhasil di update'
+        ]);
     }
 }

@@ -9,6 +9,8 @@ $(document).ready(function () {
     __onChange();
     __clickJam();
     __submit();
+    __btnAccept();
+    __btnReject();
     var defaultItemId = 0;
     var today = new Date();
     var dd = today.getDate();
@@ -188,6 +190,42 @@ function __submit() {
                 window.location.reload();
             },
             error: function (error) {
+                //
+            },
+        });
+    });
+}
+
+function __btnAccept() {
+    $(document).on("click", "#btn-accept", function () {
+        const id = $(this).attr("data-id");
+        const menu_id = $(this).attr("menu-id");
+        $.ajax({
+            type: "POST",
+            url: "/admin/transaksi/booking",
+            data: { id, menu_id },
+            dataType: "JSON",
+            success: function (res) {
+                window.location.reload();
+            },
+            error: function (err) {
+                //
+            },
+        });
+    });
+}
+function __btnReject() {
+    $(document).on("click", "#btn-reject", function () {
+        const id = $(this).attr("data-id");
+        $.ajax({
+            type: "POST",
+            url: "/admin/transaksi/booking/reject",
+            data: { id },
+            dataType: "JSON",
+            success: function (res) {
+                window.location.reload();
+            },
+            error: function (err) {
                 //
             },
         });

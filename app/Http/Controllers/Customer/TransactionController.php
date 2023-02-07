@@ -78,8 +78,8 @@ class TransactionController extends Controller
       'price' => (int)$price,
       'total_price' => (int)$total_price,
       'noted' => $note,
-      'start_time' => $starttime,
-      'end_time' => $today . ' ' . $jam[0] . ':00',
+      'start_time' => $today . ' ' . $jam[0] . ':00',
+      'end_time' => $starttime,
       'status' => 0
     ]);
 
@@ -100,19 +100,11 @@ class TransactionController extends Controller
 
   public function booking()
   {
-    $auth = Auth::user();
-    $transaksi = Transaksi::with(['transaksi_details'])
-      ->where('user_id', $auth->id)
+    $user = Auth::user();
+    $transaksis = Transaksi::with(['transaksi_details'])
+      ->where('user_id', $user->id)
       ->whereDate('created_at', date('Y-m-d'))
       ->get();
-    // $transaksi_detail = Transaksi::with(['transaksi_details'])
-    //   ->where('user_id', $auth->id)
-    //   ->whereDate('created_at', date('Y-m-d'))
-    //   ->whereHas('transaksi_details', function ($q) {
-    //     $q->distinct('no_transaksi');
-    //   })
-    //   ->get();
-    dd($transaksi);
-    return view('customer.transaksi.booking', compact('transaksi'));
+    return view('customer.transaksi.booking', compact('transaksis', 'user'));
   }
 }

@@ -42,6 +42,9 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::patch('menu-items/{id}', [MenuItemController::class, 'update'])->name('menu-item.update');
     Route::delete('menu-items/{id}', [MenuItemController::class, 'destroy'])->name('menu-item.destroy');
 
+    Route::get('transaksi/booking', [TransaksiController::class, 'index'])->name('booking.user');
+    Route::post('transaksi/booking', [TransaksiController::class, 'storeAccept'])->name('booking.storeAccept');
+    Route::post('transaksi/booking/reject', [TransaksiController::class, 'storeReject'])->name('booking.storeReject');
 
     Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
 });
