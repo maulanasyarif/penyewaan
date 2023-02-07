@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TransaksiResult;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TransaksiController extends Controller
 {
@@ -34,7 +36,7 @@ class TransaksiController extends Controller
 
         $transaksi->status = 1;
         $transaksi->save();
-
+        Mail::to($transaksi->user->email)->send(new TransaksiResult($transaksi->user, $transaksi));
         $getTransaksiAll = Transaksi::whereTime('start_time', date('H:i:s', strtotime($transaksi->start_time)))
             ->where('status', 0)
             ->whereHas('transaksi_details', function ($q) use ($menu_id) {
@@ -45,6 +47,7 @@ class TransaksiController extends Controller
         foreach ($getTransaksiAll as $tReject) {
             $tReject->status = 2;
             $tReject->save();
+            Mail::to($tReject->user->email)->send(new TransaksiResult($tReject->user, $tReject));
         }
 
         return response()->json([
