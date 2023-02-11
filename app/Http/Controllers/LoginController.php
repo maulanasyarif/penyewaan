@@ -27,14 +27,31 @@ class LoginController extends Controller
             'password' => $request->input('password'),
         ];
 
-        
-        // dd(Auth::Attempt($data));
-        if (Auth::Attempt($data)) {
-            return redirect()->route('customer');
-        } else {
-            Session::flash('error', 'Email atau Password Salah');
-            return redirect('/');
+        $user = User::where('email', $request->email)
+        ->get();
+        if($user){
+            if($user[0]['role'] == "admin"){
+                if (Auth::Attempt($data)) {
+                    return redirect()->route('home');
+                } else {
+                    return redirect('/');
+                }
+            }else if ($user[0]['role'] == "customer"){
+                if (Auth::Attempt($data)) {
+                    return redirect()->route('customer');
+                } else {
+                    return redirect('/');
+                }
+            }
+        }else{
+            Session::flash('error', 'User tidak terdaftar');
         }
+        // if (Auth::Attempt($data)) {
+        //     return redirect()->route('customer');
+        // } else {
+        //     Session::flash('error', 'Email atau Password Salah');
+        //     return redirect('/');
+        // }
     }
 
     public function logoutaksi()
