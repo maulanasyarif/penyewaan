@@ -33,7 +33,7 @@ $(document).ready(function () {
 
 var jam = [];
 var arrJam = [];
-for (let startHourInDay = 0; startHourInDay < 24; startHourInDay++) {
+for (let startHourInDay = 10; startHourInDay < 22; startHourInDay++) {
     let date = new Date(null);
     date.setHours(startHourInDay);
     let timeString = date.toLocaleTimeString("id-ID", {

@@ -27,6 +27,8 @@ class LoginController extends Controller
             'password' => $request->input('password'),
         ];
 
+        
+        // dd(Auth::Attempt($data));
         if (Auth::Attempt($data)) {
             return redirect()->route('customer');
         } else {

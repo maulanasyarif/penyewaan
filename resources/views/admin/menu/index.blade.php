@@ -27,37 +27,37 @@
         <div class="row">
             <a href="{{route('menu.create')}}" class="btn btn-primary mb-3">Tambah Data</a>
             <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">Category</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" class="w-25">Aksi</th>
-                  </tr>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Category</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="w-25">Aksi</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  @forelse ($menus as $menu)
-                  <tr>
-                    <th scope="row">{{strtoupper($menu->name)}}</th>
-                    <td>{{$menu->status == 0 ? 'Aktif' : 'Tidak Aktif'}}</td>
-                    <td>
-                        <div class="row">
-                            <a class="btn btn-success" href="{{route('menu.edit', $menu->id)}}">Edit</a>
-                            <button class="btn btn-danger edit-data" data-id="{{$menu->id}}">Hapus</button>
-                        </div>
-                    </td>
-                  </tr>
-                  @empty
-                      <tr class="text-center">
+                    @forelse ($menus as $menu)
+                    <tr>
+                        <th scope="row">{{strtoupper($menu->name)}}</th>
+                        <td>{{$menu->status == 0 ? 'Aktif' : 'Tidak Aktif'}}</td>
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-success" href="{{route('menu.edit', $menu->id)}}">Edit</a>
+                                <button class="btn btn-danger edit-data" data-id="{{$menu->id}}">Hapus</button>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr class="text-center">
                         <td colspan="3">Tidak ada data!</td>
-                      </tr>
-                  @endforelse
+                    </tr>
+                    @endforelse
                 </tbody>
-              </table>
-              <div>
+            </table>
+            <div>
                 {{
                     $menus->links('pagination::bootstrap-4')
                 }}
-              </div>
+            </div>
         </div>
         <!-- /.row -->
         <!-- /.row (main row) -->
@@ -72,24 +72,26 @@
 <script src="{{ asset('assets//plugins/jquery/jquery.min.js') }}"></script>
 <script>
 $(document).ready(function() {
-  $.ajaxSetup({
+    $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     // var aa = test(10);
-    $(".edit-data").on("click", function(){
-      const confirmDelete = confirm('Yakin delete?');
-      let dataId = $(this).attr("data-id");
-      if(confirmDelete) {
+    $(".edit-data").on("click", function() {
+        const confirmDelete = confirm('Yakin delete?');
+        let dataId = $(this).attr("data-id");
+        if (confirmDelete) {
             $.ajax({
-            method: 'DELETE',
-            url: '/admin/menu/' + dataId,
-            data: {id:dataId},
-            success: (res) => {
-              window.location.reload()
-            }
-          })
+                method: 'DELETE',
+                url: '/admin/menu/' + dataId,
+                data: {
+                    id: dataId
+                },
+                success: (res) => {
+                    window.location.reload()
+                }
+            })
         }
     });
 })

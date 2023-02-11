@@ -59,6 +59,7 @@ Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
     Route::get('transaksi', [TransactionController::class, 'index'])->name('customer');
     Route::post('transaksi', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('booking', [TransactionController::class, 'booking'])->name('booking');
+    Route::get('history', [TransactionController::class, 'history'])->name('history');
 
     Route::get('logoutaksi', [CustomerLoginController::class, 'logoutaksi'])->name('logoutaksicustomer');
 });

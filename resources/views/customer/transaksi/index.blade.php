@@ -1,5 +1,5 @@
 @extends('customer.layout.app')
-@section('title', 'Dashboard')
+@section('title', 'Transaksi')
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -11,8 +11,8 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
+                    <li class="breadcrumb-item"><a href="#">Customer</a></li>
+                    <li class="breadcrumb-item active">Transaksi</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,7 +29,7 @@
                 <div class="row" id="option">
                     <div class="col-md-3">
                         <select id="item" name="item_id" style="width: 100%; height: 30px;">
-                            <option >-- Choose Category --</option>
+                            <option>-- Choose Category --</option>
                         </select>
                     </div>
                     <div class="col-md-4">
