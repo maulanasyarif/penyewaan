@@ -194,7 +194,7 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        
+
                         <li class="nav-header">MASTER</li>
                         <li class="nav-item">
                             <a href="{{route('home')}}" class="nav-link active">
@@ -235,8 +235,8 @@
                                 </p>
                             </a>
                         </li>
-                       
-                        <li class="nav-item has-treeview">
+
+                        <!-- <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
@@ -294,6 +294,14 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li> -->
+                        <li class="nav-item ">
+                            <a href="{{route('historyAdmin')}}" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Riwayat
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('logoutaksi') }}" class="nav-link">
