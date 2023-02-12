@@ -71,8 +71,9 @@ class TransaksiController extends Controller
     public function history()
     {
         $history = Transaksi::with(['transaksi_details'])
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
-        
+
         return view('admin.transaksi.history', compact('history'));
     }
 }

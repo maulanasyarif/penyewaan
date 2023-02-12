@@ -45,10 +45,8 @@
                                 <td>{{ $h->start_time }}</td>
                                 <td>Rp. {{ number_format($h->price, '2', ',') }}</td>
                                 <td>{{ count(json_decode($h->jam)) }} Jam</td>
-                                <!-- <td>
-                            </td> -->
                                 <td>Rp. {{ number_format($h->total_price, '2', ',') }}</td>
-                                <td>{{ $h->status == 0 ? 'Menunggu' : ($h->status == 1 ? 'Diterima' : 'Gagal') }}
+                                <td>{{ $h->start_time < date('Y-m-d H:i:s') && $h->status == 0 ? 'Kadaluarsa' : ($h->status == 0 ? 'Menunggu' : ($h->status == 1 ? 'Diterima' : 'Gagal')) }}
                                 </td>
                             </tr>
                         @empty

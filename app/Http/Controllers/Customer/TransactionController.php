@@ -105,7 +105,7 @@ class TransactionController extends Controller
       ->where('user_id', $user->id)
       ->whereDate('created_at', date('Y-m-d'))
       ->get();
-      
+
     return view('customer.transaksi.booking', compact('transaksis', 'user'));
   }
 
@@ -114,8 +114,9 @@ class TransactionController extends Controller
     $user = Auth::user();
     $history = Transaksi::with(['transaksi_details'])
       ->where('user_id', $user->id)
+      ->orderBy('created_at', 'desc')
       ->paginate(10);
-      
-      return view('customer.transaksi.history', compact('history'));
+
+    return view('customer.transaksi.history', compact('history'));
   }
 }
