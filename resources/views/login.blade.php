@@ -33,31 +33,20 @@
         </div>
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-
+            <div id="login" class="card-body login-card-body">
+                <!-- /.login-card-body -->
                 <form id="form-login" method="POST" action="{{ route('loginaksi')}}">
                     @csrf
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> -->
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Username" name="email" required="true">
-                        <!-- <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div> -->
+                        <input type="email" class="form-control" placeholder="email" name="email" required="true">
                     </div>
                     <div class="input-group mb-3">
                         <input id="password" type="password" class="form-control" placeholder="Password" required="true"
                             name="password">
-                        <!-- <div class=" input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-6">
                             <div class="">
                                 <input type="checkbox" id="look">
                                 <label for="s-password">
@@ -66,60 +55,91 @@
                             </div>
                         </div>
                         <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <div class="col-6">
+                            <div class="row col-md-12">
+                                <button id="btn-regis" type="button" class="btn btn-sm btn-success">Sign
+                                    Up</button>&ensp;
+                                <button type="submit" class="btn btn-sm btn-primary">Sign In</button>
+                            </div>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
                 <a href="{{url('/').'/forgot'}}">Lupa password</a>
-                <!-- <div class="social-auth-links text-center mb-3">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>
-                </div> -->
-                <!-- /.social-auth-links -->
-
-                <!-- <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
-                <p class="mb-0">
-                    <a href="register.html" class="text-center">Register a new membership</a>
-                </p> -->
             </div>
             <!-- /.login-card-body -->
+
+            <div id="regis" class="card-body login-card-body d-none">
+                <p class="login-box-msg">Register</p>
+
+                <form id="form-regis" method="POST" action="{{ route('register')}}">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input id="text" type="text" class="form-control" placeholder="Nama" required="true"
+                            name="name">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="email" name="email" required="true">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="password" type="password" class="form-control" placeholder="Password" required="true"
+                            name="password">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input min="0" type="number" class="form-control" placeholder="No Handphone" required="true"
+                            name="telephone">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+                            <button id="btn-login" type="button" class="btn btn-success btn-sm">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Sign Up</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- /.login-box -->
+        <!-- /.login-box -->
 
-    <!-- jQuery -->
-    <script src="{{ asset('assets//plugins/jquery/jquery.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
+        <!-- jQuery -->
+        <script src="{{ asset('assets//plugins/jquery/jquery.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script>
-    $(document).ready(function() {
-        $('#look').on('click', function() {
-            // console.log("Aaa");
-            if ($(this).is(":checked")) {
-                $("#password").attr("type", "text");
-            } else {
-                $("#password").attr("type", "password");
-            }
+        <script>
+        $(document).ready(function() {
+            $('#look').on('click', function() {
+                // console.log("Aaa");
+                if ($(this).is(":checked")) {
+                    $("#password").attr("type", "text");
+                } else {
+                    $("#password").attr("type", "password");
+                }
+            })
+
+            $("#btn-regis").on('click', function(e) {
+                $('#regis').removeClass("d-none")
+                $('#login').addClass("d-none")
+            })
+
+            $("#btn-login").on('click', function(e) {
+                $('#login').removeClass("d-none")
+                $('#regis').addClass("d-none")
+            })
+
         })
-    })
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 
 </body>
 

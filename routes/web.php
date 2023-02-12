@@ -25,6 +25,7 @@ use App\Http\Controllers\TransaksiController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+    
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('transaksi/booking', [TransaksiController::class, 'index'])->name('booking.user');
     Route::post('transaksi/booking', [TransaksiController::class, 'storeAccept'])->name('booking.storeAccept');
     Route::post('transaksi/booking/reject', [TransaksiController::class, 'storeReject'])->name('booking.storeReject');
+    Route::get('historyAdmnin', [TransaksiController::class, 'history'])->name('historyAdmin');
 
     Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
 });
@@ -65,6 +67,7 @@ Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::post('register', [LoginController::class, 'register'])->name('register');
 Route::get('forgot', [LoginController::class, 'viewForgot'])->name('forgot');
 Route::post('forgot', [LoginController::class, 'forgot'])->name('forgotAksi');
 Route::post('loginaksi', [LoginController::class, 'loginaksi'])->name('loginaksi');

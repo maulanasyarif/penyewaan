@@ -1,4 +1,4 @@
-@extends('customer.layout.app')
+@extends('admin.layout.app')
 @section('title', 'History')
 
 @section('content')
@@ -7,11 +7,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 id="token" class="m-0 text-dark">Wellcome {{ Auth::user()->name }}</h1>
+                <!-- <h1 id="token" class="m-0 text-dark">Wellcome {{ Auth::user()->name }}</h1> -->
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Customer</a></li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">History</li>
                 </ol>
             </div><!-- /.col -->
@@ -28,11 +28,11 @@
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
+                        <th scope="col">Nama</th>
                         <th scope="col">Nama Sewa</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Harga Sewa</th>
                         <th scope="col">Total Jam</th>
-                        <!-- <th scope="col">Detail Jam</th> -->
                         <th scope="col">Total Harga</th>
                         <th scope="col">Status</th>
                     </tr>
@@ -40,6 +40,7 @@
                 <tbody>
                     @forelse ($history as $h)
                     <tr>
+                        <td>{{$h->user->name }}</td>
                         <td>{{$h->transaksi_details[0]->menuitem->name}}</td>
                         <td>{{$h->start_time}}</td>
                         <td>Rp. {{number_format($h->price, '2', ',')}}</td>

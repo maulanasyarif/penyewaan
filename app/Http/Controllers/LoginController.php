@@ -32,7 +32,7 @@ class LoginController extends Controller
         if($user){
             if($user[0]['role'] == "admin"){
                 if (Auth::Attempt($data)) {
-                    return redirect()->route('home');
+                    return redirect()->route('menu.index');
                 } else {
                     return redirect('/');
                 }
@@ -108,5 +108,31 @@ class LoginController extends Controller
             'password' => Hash::make($request->password)
         ]);
         return redirect()->route('login')->with('success', 'Silakan loggin kembali');
+    }
+
+    public function register(Request $request)
+    {
+        $role = "customer";
+        $name = $request->name;
+        $email = $request->email;
+        $telephone = $request->telephone;
+        $password = Hash::make($request->password);
+        $request->validate([
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'name' => 'required',
+            'telephone' => 'required'
+        ]);
+        
+        $user = new User;
+        $user->name = $name;
+        $user->email = $email;
+        $user->role = $role;
+        $user->telephone = $telephone;
+        $user->password = $password;
+        
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Silakan loggin');
     }
 }

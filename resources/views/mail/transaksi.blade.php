@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ISO - TMS | Log in</title>
+    <title></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,23 +29,23 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href=""><b>TMS</b> - ISO</a>
+            <!-- <a href=""><b>TMS</b> - ISO</a> -->
         </div>
         <!-- /.login-logo -->
         <div class="card" style="width: 18rem;">
-          <div class="card-header">
-            {{$menu_item}}
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Nama: {{$user_name}}</li>
-            <li class="list-group-item">Telephone: {{$user_telepon}}</li>
-            <li class="list-group-item">No Transaksi: {{$no_transaksi}}</li>
-            <li class="list-group-item">Catatan: {{$noted}}</li>
-            <li class="list-group-item">Mulai Booking: {{$start_time}}</li>
-            <li class="list-group-item">Selesai Booking: {{$end_time}}</li>
-            <li class="list-group-item">Status: {{$status == 0 ? 'Menunggu' : '-'}}</li>
-            <li class="list-group-item">Item Booking: {{$menu_item}}</li>
-          </ul>
+            <div class="card-header">
+                {{$menu_item}}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nama: {{$user_name}}</li>
+                <li class="list-group-item">Telephone: {{$user_telepon}}</li>
+                <li class="list-group-item">No Transaksi: {{$no_transaksi}}</li>
+                <li class="list-group-item">Catatan: {{$noted}}</li>
+                <li class="list-group-item">Mulai Booking: {{$start_time}}</li>
+                <li class="list-group-item">Selesai Booking: {{$end_time}}</li>
+                <li class="list-group-item">Status: {{$status == 0 ? 'Menunggu' : '-'}}</li>
+                <li class="list-group-item">Item Booking: {{$menu_item}}</li>
+            </ul>
         </div>
     </div>
     <!-- /.login-box -->

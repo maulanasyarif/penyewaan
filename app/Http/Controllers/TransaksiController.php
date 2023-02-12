@@ -67,4 +67,12 @@ class TransaksiController extends Controller
             'message' => 'Transaksi berhasil di update'
         ]);
     }
+
+    public function history()
+    {
+        $history = Transaksi::with(['transaksi_details'])
+            ->paginate(10);
+        
+        return view('admin.transaksi.history', compact('history'));
+    }
 }
