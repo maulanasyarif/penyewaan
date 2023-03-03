@@ -36,11 +36,12 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Masukkan token</p>
 
-                <form id="form-login" method="POST" action="{{ route('forgot')}}">
+                <form id="form-login" method="GET" action="{{ route('verify-token') }}">
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="input-group mb-3">
-                        <input type="token" class="form-control" placeholder="Kode Token" name="token" required="true">
+                        <input type="token" class="form-control" placeholder="Kode Token" name="token"
+                            required="true">
                         <!-- <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -88,14 +89,14 @@
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script>
-    $(document).ready(function() {
-        $('#look').on('click', function() {
-            // console.log("Aaa");
-            if ($(this).is(":checked")) {
-                $("#password").attr("type", "text");
-            }
+        $(document).ready(function() {
+            $('#look').on('click', function() {
+                // console.log("Aaa");
+                if ($(this).is(":checked")) {
+                    $("#password").attr("type", "text");
+                }
+            })
         })
-    })
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

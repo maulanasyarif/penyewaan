@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Transaksi</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,17 +34,17 @@
         <!-- /.login-logo -->
         <div class="card" style="width: 18rem;">
             <div class="card-header">
-                {{$menu_item}}
+                {{ $menu_item }}
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Nama: {{$user_name}}</li>
-                <li class="list-group-item">Telephone: {{$user_telepon}}</li>
-                <li class="list-group-item">No Transaksi: {{$no_transaksi}}</li>
-                <li class="list-group-item">Catatan: {{$noted}}</li>
-                <li class="list-group-item">Mulai Booking: {{$start_time}}</li>
-                <li class="list-group-item">Selesai Booking: {{$end_time}}</li>
-                <li class="list-group-item">Status: {{$status == 0 ? 'Menunggu' : '-'}}</li>
-                <li class="list-group-item">Item Booking: {{$menu_item}}</li>
+                <li class="list-group-item">Nama: {{ $user_name }}</li>
+                <li class="list-group-item">Telephone: {{ $user_telepon }}</li>
+                <li class="list-group-item">No Transaksi: {{ $no_transaksi }}</li>
+                <li class="list-group-item">Catatan: {{ $noted }}</li>
+                <li class="list-group-item">Mulai Booking: {{ $start_time }}</li>
+                <li class="list-group-item">Selesai Booking: {{ $end_time }}</li>
+                <li class="list-group-item">Status: {{ $status == 0 ? 'Menunggu' : '-' }}</li>
+                <li class="list-group-item">Item Booking: {{ $menu_item }}</li>
             </ul>
         </div>
     </div>
@@ -59,14 +59,14 @@
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script>
-    $(document).ready(function() {
-        $('#look').on('click', function() {
-            // console.log("Aaa");
-            if ($(this).is(":checked")) {
-                $("#password").attr("type", "text");
-            }
+        $(document).ready(function() {
+            $('#look').on('click', function() {
+                // console.log("Aaa");
+                if ($(this).is(":checked")) {
+                    $("#password").attr("type", "text");
+                }
+            })
         })
-    })
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

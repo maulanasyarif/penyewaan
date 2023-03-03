@@ -28,22 +28,22 @@ class LoginController extends Controller
         ];
 
         $user = User::where('email', $request->email)
-        ->get();
-        if($user){
-            if($user[0]['role'] == "admin"){
+            ->get();
+        if ($user) {
+            if ($user[0]['role'] == "admin") {
                 if (Auth::Attempt($data)) {
                     return redirect()->route('menu.index');
                 } else {
                     return redirect('/');
                 }
-            }else if ($user[0]['role'] == "customer"){
+            } else if ($user[0]['role'] == "customer") {
                 if (Auth::Attempt($data)) {
                     return redirect()->route('customer');
                 } else {
                     return redirect('/');
                 }
             }
-        }else{
+        } else {
             Session::flash('error', 'User tidak terdaftar');
         }
         // if (Auth::Attempt($data)) {
@@ -123,14 +123,14 @@ class LoginController extends Controller
             'name' => 'required',
             'telephone' => 'required'
         ]);
-        
+
         $user = new User;
         $user->name = $name;
         $user->email = $email;
         $user->role = $role;
         $user->telephone = $telephone;
         $user->password = $password;
-        
+
         $user->save();
 
         return redirect()->route('login')->with('success', 'Silakan loggin');
