@@ -109,6 +109,14 @@ class TransactionController extends Controller
     return view('customer.transaksi.booking', compact('transaksis', 'user'));
   }
 
+
+
+  public function detail($id)
+  {
+    $transaksi = Transaksi::with('user', 'transaksi_details', 'transaksi_details.menuitem')->findOrFail($id);
+    return view('customer.transaksi.detail', compact('transaksi'));
+  }
+
   public function history(Request $request)
   {
     $user = Auth::user();

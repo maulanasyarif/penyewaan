@@ -6,6 +6,7 @@ use App\Mail\TransaksiResult;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TransaksiController extends Controller
 {
@@ -33,10 +34,10 @@ class TransaksiController extends Controller
     {
         $menu_id = $request->menu_id;
         $transaksi = Transaksi::findOrFail($request->id);
-
+        $qrcode = QrCode::size(150)->generate(route('detail', $request->id));
         $transaksi->status = 1;
         $transaksi->save();
-        Mail::to($transaksi->user->email)->send(new TransaksiResult($transaksi->user, $transaksi));
+        Mail::to($transaksi->user->email)->send(new TransaksiResult($transaksi->user, $transaksi, $qrcode));
         $getTransaksiAll = Transaksi::whereTime('start_time', date('H:i:s', strtotime($transaksi->start_time)))
             ->where('status', 0)
             ->whereHas('transaksi_details', function ($q) use ($menu_id) {
@@ -47,7 +48,7 @@ class TransaksiController extends Controller
         foreach ($getTransaksiAll as $tReject) {
             $tReject->status = 2;
             $tReject->save();
-            Mail::to($tReject->user->email)->send(new TransaksiResult($tReject->user, $tReject));
+            Mail::to($tReject->user->email)->send(new TransaksiResult($tReject->user, $tReject, $qrcode));
         }
 
         return response()->json([
@@ -58,10 +59,11 @@ class TransaksiController extends Controller
 
     public function storeReject(Request $request)
     {
-        $transaksi = Transaksi::findOrFail($request->id);
-
+        $transaksi = Transaksi::with('user')->findOrFail($request->id);
+        $qrcode = QrCode::size(150)->generate(route('detail', $request->id));
         $transaksi->status = 2;
         $transaksi->save();
+        Mail::to($transaksi->user->email)->send(new TransaksiResult($transaksi->user, $transaksi, $qrcode));
         return response()->json([
             'success' => true,
             'message' => 'Transaksi berhasil di update'

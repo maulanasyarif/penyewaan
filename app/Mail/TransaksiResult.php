@@ -21,10 +21,12 @@ class TransaksiResult extends Mailable
 
     protected $user;
     protected $transaksi;
-    public function __construct($user, $transaksi)
+    protected $qrcode;
+    public function __construct($user, $transaksi, $qrcode)
     {
         $this->user = $user;
         $this->transaksi = $transaksi;
+        $this->qrcode = $qrcode;
     }
 
     /**
@@ -54,7 +56,8 @@ class TransaksiResult extends Mailable
                 'menu_item' => $this->transaksi->transaksi_details[0]->menuitem->name,
                 'start_time' => $this->transaksi->start_time,
                 'total_price' => $this->transaksi->total_price,
-                'status' => $this->transaksi->status == 1 ? 'Diterima' : ($this->transaksi->status == 2 ? 'Gagal' : 'Menunggu')
+                'status' => $this->transaksi->status == 1 ? 'Diterima' : ($this->transaksi->status == 2 ? 'Gagal' : 'Menunggu'),
+                'qrcode' => $this->qrcode,
             ]
         );
     }

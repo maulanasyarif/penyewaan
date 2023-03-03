@@ -25,7 +25,7 @@ use App\Http\Controllers\TransaksiController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-    
+
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -74,3 +74,5 @@ Route::post('loginaksi', [LoginController::class, 'loginaksi'])->name('loginaksi
 Route::get('view-verify', [LoginController::class, 'token'])->name('view-verify');
 Route::get('verify-token', [LoginController::class, 'verifyToken'])->name('verify-token');
 Route::post('verify-token', [LoginController::class, 'updatePassword'])->name('verify-token');
+
+Route::get('booking/{id}/detail', [TransactionController::class, 'detail'])->name('detail');
