@@ -32,7 +32,7 @@ class LoginController extends Controller
         if ($user) {
             if ($user[0]['role'] == "admin") {
                 if (Auth::Attempt($data)) {
-                    return redirect()->route('menu.index');
+                    return redirect()->route('home');
                 } else {
                     return redirect('/');
                 }

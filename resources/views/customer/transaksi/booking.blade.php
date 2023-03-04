@@ -26,9 +26,9 @@
         <!-- Small boxes (Stat box) -->
         <!-- /.row -->
         <!-- Main row -->
-        <div class="col-md row ">
+        <div class="col-md-12 row ">
             @foreach ($transaksis as $transaksi)
-            <div class="card shadow-lg col-md-6 mb-2 mr-2">
+            <div class="card shadow-lg col-md-5 mb-2 mr-2">
                 <div class="card-header">
                     <div style="font-size: 14px;">Nomor Transaksi : {{$transaksi->no_transaksi}}</div>
                     <div style="font-size: 14px;">Status :
