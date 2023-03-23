@@ -85,13 +85,13 @@
                         <h3 class="card-title">Bordered Table</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <table class="table table-bordered">
+                    <div class="card-body table-responsive">
+                        <table id="table_item" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
-                                    <th>Task</th>
-                                    <th>Progress</th>
+                                    <th>Nama</th>
+                                    <th>Harga</th>
                                     <th style="width: 40px">Label</th>
                                 </tr>
                             </thead>
