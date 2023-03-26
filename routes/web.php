@@ -6,6 +6,7 @@ use App\Http\Controllers\Customer\LoginController as CustomerLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuItemController;
+use App\Http\Controllers\DashboardController;
 
 //user
 use App\Http\Controllers\Customer\TransactionController;
@@ -47,6 +48,11 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::post('transaksi/booking', [TransaksiController::class, 'storeAccept'])->name('booking.storeAccept');
     Route::post('transaksi/booking/reject', [TransaksiController::class, 'storeReject'])->name('booking.storeReject');
     Route::get('historyAdmnin', [TransaksiController::class, 'history'])->name('historyAdmin');
+
+    Route::get('card', [DashboardController::class, 'card'])->name('card');
+    Route::get('week', [DashboardController::class, 'week'])->name('week');   
+    Route::get('month', [DashboardController::class, 'month'])->name('month');   
+    Route::get('MenuItem', [DashboardController::class, 'MenuItem'])->name('MenuItem');   
 
     Route::get('logoutaksi', [LoginController::class, 'logoutaksi'])->name('logoutaksi');
 });

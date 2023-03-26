@@ -20,9 +20,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3 id="total"></h3>
 
-                        <p>New Orders</p>
+                        <p>Total Transaksi</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -35,9 +35,10 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <!-- <h3 id="omset"><sup style="font-size: 20px">%</sup></h3> -->
+                        <h3 id="sukses"></h3>
 
-                        <p>Bounce Rate</p>
+                        <p>Sukses</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -50,9 +51,9 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3 id="omset"></h3>
 
-                        <p>User Registrations</p>
+                        <p>Omset</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -65,9 +66,9 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3 id="failed"></h3>
 
-                        <p>Unique Visitors</p>
+                        <p>Failed</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -82,7 +83,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Bordered Table</h3>
+                        <h3 class="card-title">Teble Menu Item</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive">
@@ -92,50 +93,10 @@
                                     <th style="width: 10px">#</th>
                                     <th>Nama</th>
                                     <th>Harga</th>
-                                    <th style="width: 40px">Label</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-danger">55%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Clean database</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-warning">70%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Cron job running</td>
-                                    <td>
-                                        <div class="progress progress-xs progress-striped active">
-                                            <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-primary">30%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Fix and squish bugs</td>
-                                    <td>
-                                        <div class="progress progress-xs progress-striped active">
-                                            <div class="progress-bar bg-success" style="width: 90%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-success">90%</span></td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -144,11 +105,12 @@
                 <!-- /.card -->
             </div>
             <div class="col-md-8">
-                <div class="card bg-gradient-info">
+                <!-- <div class="card bg-gradient-info"> -->
+                <div class="card">
                     <div class="card-header border-0">
                         <h3 class="card-title">
                             <i class="fas fa-th mr-1"></i>
-                            Grafik Minggu Berjalan
+                            Grafik Bulanan
                         </h3>
 
                         <div class="card-tools">
@@ -161,46 +123,42 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <canvas class="chart" id="line-chart"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        <div class="col-md-12 row d-flex justify-content-end" style="text-align-last: center;">
+                            <div class="col-md-4">
+                                <select id="month" class="custom-select border-1 text-muted">
+                                    <option value="" selected="">Bulan</option>
+                                    <option value="1">Januari</option>
+                                    <option value="2">Febuari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="year_2" class="custom-select border-1 text-muted">
+
+                                </select>
+                            </div>
+                        </div>
+                        <canvas class="chart" id="day-chart" style="width: 100%;"></canvas>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer bg-transparent">
-                        <div class="row">
-                            <div class="col-4 text-center">
-                                <input type="text" class="knob" data-readonly="true" value="20" data-width="60"
-                                    data-height="60" data-fgColor="#39CCCC">
-
-                                <div class="text-white">Mail-Orders</div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-4 text-center">
-                                <input type="text" class="knob" data-readonly="true" value="50" data-width="60"
-                                    data-height="60" data-fgColor="#39CCCC">
-
-                                <div class="text-white">Online</div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-4 text-center">
-                                <input type="text" class="knob" data-readonly="true" value="30" data-width="60"
-                                    data-height="60" data-fgColor="#39CCCC">
-
-                                <div class="text-white">In-Store</div>
-                            </div>
-                            <!-- ./col -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.card-footer -->
                 </div>
                 <!-- /.card -->
             </div>
         </div>
-        <div class="card bg-gradient-info">
+        <div class="card">
             <div class="card-header border-0">
                 <h3 class="card-title">
                     <i class="fas fa-th mr-1"></i>
-                    Grafik Bulanan
+                    Grafik Tahunan
                 </h3>
 
                 <div class="card-tools">
@@ -213,36 +171,16 @@
                 </div>
             </div>
             <div class="card-body">
-                <canvas class="chart" id="line-chart"
-                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <div class="col-md-12 row d-flex justify-content-end" style="text-align-last: center;">
+                    <div class="col-md-4">
+                        <select id="year" class="custom-select border-1 text-muted">
+
+                        </select>
+                    </div>
+                </div>
+                <canvas class="chart" id="month-chart" style="width: 100%;"></canvas>
             </div>
             <!-- /.card-body -->
-            <div class="card-footer bg-transparent">
-                <div class="row">
-                    <div class="col-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                            data-fgColor="#39CCCC">
-
-                        <div class="text-white">Mail-Orders</div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                            data-fgColor="#39CCCC">
-
-                        <div class="text-white">Online</div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-4 text-center">
-                        <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                            data-fgColor="#39CCCC">
-
-                        <div class="text-white">In-Store</div>
-                    </div>
-                    <!-- ./col -->
-                </div>
-                <!-- /.row -->
-            </div>
             <!-- /.card-footer -->
         </div>
         <!-- /.card -->
@@ -252,9 +190,10 @@
 @endsection
 
 @section('js-source')
-<script src="{{ asset('src/main.js') }}"></script>
+<script src="{{ asset('src/dashboard.js') }}"></script>
 <script src="{{ asset('assets//plugins/jquery/jquery.min.js') }}"></script>
-<script src="">
-
-</script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"
+    integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @endsection
