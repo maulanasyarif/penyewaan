@@ -110,7 +110,7 @@
                     <div class="card-header border-0">
                         <h3 class="card-title">
                             <i class="fas fa-th mr-1"></i>
-                            Grafik Bulanan
+                            Grafik Harian
                         </h3>
 
                         <div class="card-tools">
@@ -158,7 +158,7 @@
             <div class="card-header border-0">
                 <h3 class="card-title">
                     <i class="fas fa-th mr-1"></i>
-                    Grafik Tahunan
+                    Grafik Bulanan
                 </h3>
 
                 <div class="card-tools">
