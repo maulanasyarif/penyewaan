@@ -153,47 +153,47 @@
                 </div>
                 <!-- /.card -->
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header border-0">
-                <h3 class="card-title">
-                    <i class="fas fa-th mr-1"></i>
-                    Grafik Bulanan
-                </h3>
+            <!-- </div> -->
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title">
+                        <i class="fas fa-th mr-1"></i>
+                        Grafik Bulanan
+                    </h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="col-md-12 row d-flex justify-content-end" style="text-align-last: center;">
-                    <div class="col-md-4">
-                        <select id="year" class="custom-select border-1 text-muted">
-
-                        </select>
+                    <div class="card-tools">
+                        <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 </div>
-                <canvas class="chart" id="month-chart" style="width: 100%;"></canvas>
-            </div>
-            <!-- /.card-body -->
-            <!-- /.card-footer -->
-        </div>
-        <!-- /.card -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
-@endsection
+                <div class="card-body">
+                    <div class="col-md-12 row d-flex justify-content-end" style="text-align-last: center;">
+                        <div class="col-md-4">
+                            <select id="year" class="custom-select border-1 text-muted">
 
-@section('js-source')
-<script src="{{ asset('src/dashboard.js') }}"></script>
-<script src="{{ asset('assets//plugins/jquery/jquery.min.js') }}"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"
+                            </select>
+                        </div>
+                    </div>
+                    <canvas class="chart" id="month-chart" style="width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    @endsection
+
+    @section('js-source')
+    <script src="{{ asset('src/dashboard.js') }}"></script>
+    <script src="{{ asset('assets//plugins/jquery/jquery.min.js') }}"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"
     integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@endsection
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @endsection
