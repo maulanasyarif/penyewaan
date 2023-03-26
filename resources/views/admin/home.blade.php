@@ -68,7 +68,7 @@
                     <div class="inner">
                         <h3 id="failed"></h3>
 
-                        <p>Failed</p>
+                        <p>Failed & Pending</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
